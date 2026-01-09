@@ -24,7 +24,7 @@ class MemberFactory extends Factory
     {
         return [
             'billable_rate' => null,
-            'role' => Role::Employee,
+            'role' => Role::GTMEngineer,
             'organization_id' => Organization::factory(),
             'user_id' => User::factory(),
         ];

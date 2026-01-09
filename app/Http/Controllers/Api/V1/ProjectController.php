@@ -62,7 +62,7 @@ class ProjectController extends Controller
 
         $projects = $projectsQuery->paginate(config('app.pagination_per_page_default'));
 
-        $showBillableRate = $this->member($organization)->role !== Role::Employee->value || $organization->employees_can_see_billable_rates;
+        $showBillableRate = $this->member($organization)->role !== Role::GTMEngineer->value || $organization->employees_can_see_billable_rates;
 
         return new ProjectCollection($projects, $showBillableRate);
     }

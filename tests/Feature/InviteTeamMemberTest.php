@@ -63,7 +63,7 @@ class InviteTeamMemberTest extends TestCase
         $user = User::factory()->withPersonalOrganization()->create();
         $invitation = $owner->currentTeam->teamInvitations()->create([
             'email' => $user->email,
-            'role' => Role::Employee->value,
+            'role' => Role::GTMEngineer->value,
         ]);
         $this->actingAs($user);
 
@@ -98,7 +98,7 @@ class InviteTeamMemberTest extends TestCase
 
         $invitation = $owner->currentTeam->teamInvitations()->create([
             'email' => $user->email,
-            'role' => Role::Employee->value,
+            'role' => Role::GTMEngineer->value,
         ]);
         $this->actingAs($user);
 
@@ -128,7 +128,7 @@ class InviteTeamMemberTest extends TestCase
         $user = User::factory()->withPersonalOrganization()->create();
         $invitation = $owner->currentTeam->teamInvitations()->create([
             'email' => 'firstname.lastname@mail.test',
-            'role' => Role::Employee->value,
+            'role' => Role::GTMEngineer->value,
         ]);
         $this->actingAs($user);
 

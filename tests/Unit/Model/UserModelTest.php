@@ -60,12 +60,12 @@ class UserModelTest extends ModelTestAbstract
         $organization = Organization::factory()->withOwner($owner)->create();
         $user = User::factory()->create();
         $user->organizations()->attach($organization, [
-            'role' => Role::Employee->value,
+            'role' => Role::GTMEngineer->value,
         ]);
         $otherOrganization = Organization::factory()->create();
         $otherUser = User::factory()->create();
         $otherUser->organizations()->attach($otherOrganization, [
-            'role' => Role::Employee->value,
+            'role' => Role::GTMEngineer->value,
         ]);
 
         // Act

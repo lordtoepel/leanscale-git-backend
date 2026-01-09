@@ -728,7 +728,7 @@ class TaskEndpointTest extends ApiEndpointTestAbstract
     public function test_store_endpoint_allows_employee_to_create_task_in_public_project_when_employees_can_manage_tasks_is_enabled(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(\App\Enums\Role::Employee);
+        $data = $this->createUserWithRole(\App\Enums\Role::GTMEngineer);
         $data->organization->employees_can_manage_tasks = true;
         $data->organization->save();
         $project = Project::factory()->forOrganization($data->organization)->isPublic()->create();
@@ -752,7 +752,7 @@ class TaskEndpointTest extends ApiEndpointTestAbstract
     public function test_store_endpoint_allows_employee_to_create_task_in_accessible_private_project_when_employees_can_manage_tasks_is_enabled(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(\App\Enums\Role::Employee);
+        $data = $this->createUserWithRole(\App\Enums\Role::GTMEngineer);
         $data->organization->employees_can_manage_tasks = true;
         $data->organization->save();
         $project = Project::factory()->forOrganization($data->organization)->isPrivate()->create();
@@ -777,7 +777,7 @@ class TaskEndpointTest extends ApiEndpointTestAbstract
     public function test_store_endpoint_fails_for_employee_creating_task_in_inaccessible_private_project_when_employees_can_manage_tasks_is_enabled(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(\App\Enums\Role::Employee);
+        $data = $this->createUserWithRole(\App\Enums\Role::GTMEngineer);
         $data->organization->employees_can_manage_tasks = true;
         $data->organization->save();
         $project = Project::factory()->forOrganization($data->organization)->isPrivate()->create();
@@ -800,7 +800,7 @@ class TaskEndpointTest extends ApiEndpointTestAbstract
     public function test_store_endpoint_fails_for_employee_when_employees_can_manage_tasks_is_disabled(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(\App\Enums\Role::Employee);
+        $data = $this->createUserWithRole(\App\Enums\Role::GTMEngineer);
         $data->organization->employees_can_manage_tasks = false;
         $data->organization->save();
         $project = Project::factory()->forOrganization($data->organization)->isPublic()->create();
@@ -822,7 +822,7 @@ class TaskEndpointTest extends ApiEndpointTestAbstract
     public function test_update_endpoint_allows_employee_to_update_task_in_public_project_when_employees_can_manage_tasks_is_enabled(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(\App\Enums\Role::Employee);
+        $data = $this->createUserWithRole(\App\Enums\Role::GTMEngineer);
         $data->organization->employees_can_manage_tasks = true;
         $data->organization->save();
         $project = Project::factory()->forOrganization($data->organization)->isPublic()->create();
@@ -845,7 +845,7 @@ class TaskEndpointTest extends ApiEndpointTestAbstract
     public function test_update_endpoint_allows_employee_to_update_task_in_accessible_private_project_when_employees_can_manage_tasks_is_enabled(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(\App\Enums\Role::Employee);
+        $data = $this->createUserWithRole(\App\Enums\Role::GTMEngineer);
         $data->organization->employees_can_manage_tasks = true;
         $data->organization->save();
         $project = Project::factory()->forOrganization($data->organization)->isPrivate()->create();
@@ -869,7 +869,7 @@ class TaskEndpointTest extends ApiEndpointTestAbstract
     public function test_update_endpoint_fails_for_employee_updating_task_in_inaccessible_private_project_when_employees_can_manage_tasks_is_enabled(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(\App\Enums\Role::Employee);
+        $data = $this->createUserWithRole(\App\Enums\Role::GTMEngineer);
         $data->organization->employees_can_manage_tasks = true;
         $data->organization->save();
         $project = Project::factory()->forOrganization($data->organization)->isPrivate()->create();
@@ -893,7 +893,7 @@ class TaskEndpointTest extends ApiEndpointTestAbstract
     public function test_update_endpoint_fails_for_employee_when_employees_can_manage_tasks_is_disabled(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(\App\Enums\Role::Employee);
+        $data = $this->createUserWithRole(\App\Enums\Role::GTMEngineer);
         $data->organization->employees_can_manage_tasks = false;
         $data->organization->save();
         $project = Project::factory()->forOrganization($data->organization)->isPublic()->create();
@@ -917,7 +917,7 @@ class TaskEndpointTest extends ApiEndpointTestAbstract
     public function test_delete_endpoint_allows_employee_to_delete_task_in_public_project_when_employees_can_manage_tasks_is_enabled(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(\App\Enums\Role::Employee);
+        $data = $this->createUserWithRole(\App\Enums\Role::GTMEngineer);
         $data->organization->employees_can_manage_tasks = true;
         $data->organization->save();
         $project = Project::factory()->forOrganization($data->organization)->isPublic()->create();
@@ -937,7 +937,7 @@ class TaskEndpointTest extends ApiEndpointTestAbstract
     public function test_delete_endpoint_allows_employee_to_delete_task_in_accessible_private_project_when_employees_can_manage_tasks_is_enabled(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(\App\Enums\Role::Employee);
+        $data = $this->createUserWithRole(\App\Enums\Role::GTMEngineer);
         $data->organization->employees_can_manage_tasks = true;
         $data->organization->save();
         $project = Project::factory()->forOrganization($data->organization)->isPrivate()->create();
@@ -958,7 +958,7 @@ class TaskEndpointTest extends ApiEndpointTestAbstract
     public function test_delete_endpoint_fails_for_employee_deleting_task_in_inaccessible_private_project_when_employees_can_manage_tasks_is_enabled(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(\App\Enums\Role::Employee);
+        $data = $this->createUserWithRole(\App\Enums\Role::GTMEngineer);
         $data->organization->employees_can_manage_tasks = true;
         $data->organization->save();
         $project = Project::factory()->forOrganization($data->organization)->isPrivate()->create();
@@ -978,7 +978,7 @@ class TaskEndpointTest extends ApiEndpointTestAbstract
     public function test_delete_endpoint_fails_for_employee_when_employees_can_manage_tasks_is_disabled(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(\App\Enums\Role::Employee);
+        $data = $this->createUserWithRole(\App\Enums\Role::GTMEngineer);
         $data->organization->employees_can_manage_tasks = false;
         $data->organization->save();
         $project = Project::factory()->forOrganization($data->organization)->isPublic()->create();

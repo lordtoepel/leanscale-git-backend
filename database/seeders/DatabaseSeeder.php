@@ -106,11 +106,11 @@ class DatabaseSeeder extends Seeder
             'password' => null,
         ]);
         $userAcmeOwnerMember = Member::factory()->forUser($userAcmeOwner)->forOrganization($organizationAcme)->role(Role::Owner)->create();
-        $userAcmeManagerMember = Member::factory()->forUser($userAcmeManager)->forOrganization($organizationAcme)->role(Role::Manager)->create();
+        $userAcmeManagerMember = Member::factory()->forUser($userAcmeManager)->forOrganization($organizationAcme)->role(Role::GTMArchitect)->create();
         $userAcmeAdminMember = Member::factory()->forUser($userAcmeAdmin)->forOrganization($organizationAcme)->role(Role::Admin)->create();
-        $userAcmeEmployeeMember = Member::factory()->forUser($userAcmeEmployee)->forOrganization($organizationAcme)->role(Role::Employee)->create();
+        $userAcmeEmployeeMember = Member::factory()->forUser($userAcmeEmployee)->forOrganization($organizationAcme)->role(Role::GTMEngineer)->create();
         $userAcmePlaceholderMember = Member::factory()->forUser($userAcmePlaceholder)->forOrganization($organizationAcme)->role(Role::Placeholder)->create();
-        $userWithMultipleOrganizationsAcmeMember = Member::factory()->forUser($userWithMultipleOrganizations)->forOrganization($organizationAcme)->role(Role::Employee)->create();
+        $userWithMultipleOrganizationsAcmeMember = Member::factory()->forUser($userWithMultipleOrganizations)->forOrganization($organizationAcme)->role(Role::GTMEngineer)->create();
         Tag::factory()->forOrganization($organizationAcme)->create([
             'name' => 'Code Review',
         ]);
@@ -178,7 +178,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@rival-company.test',
         ]);
         $userRivalManagerMember = Member::factory()->forUser($userRivalManager)->forOrganization($organizationRival)->role(Role::Admin)->create();
-        $userWithMultipleOrganizationsRivalMember = Member::factory()->forUser($userWithMultipleOrganizations)->forOrganization($organizationRival)->role(Role::Employee)->create();
+        $userWithMultipleOrganizationsRivalMember = Member::factory()->forUser($userWithMultipleOrganizations)->forOrganization($organizationRival)->role(Role::GTMEngineer)->create();
         $rivalClient = Client::factory()->forOrganization($organizationRival)->create([
             'name' => 'Scale Company',
         ]);

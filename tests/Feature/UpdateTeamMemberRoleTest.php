@@ -25,7 +25,7 @@ class UpdateTeamMemberRoleTest extends TestCase
 
         // Act
         $response = $this->put('/teams/'.$user->currentTeam->id.'/members/'.$otherUser->id, [
-            'role' => Role::Employee->value,
+            'role' => Role::GTMEngineer->value,
         ]);
 
         // Assert

@@ -76,7 +76,7 @@ class DeletionServiceTest extends TestCaseWithDatabase
         $userPlaceholder->update(['current_team_id' => null]);
 
         $memberOwner = Member::factory()->forUser($userOwner)->forOrganization($organization)->role(Role::Owner)->create();
-        $memberEmployee = Member::factory()->forUser($userEmployee)->forOrganization($organization)->role(Role::Employee)->create();
+        $memberEmployee = Member::factory()->forUser($userEmployee)->forOrganization($organization)->role(Role::GTMEngineer)->create();
         $memberPlaceholder = Member::factory()->forUser($userPlaceholder)->forOrganization($organization)->role(Role::Placeholder)->create();
         $members = collect([$memberOwner, $memberEmployee, $memberPlaceholder]);
 
@@ -336,7 +336,7 @@ class DeletionServiceTest extends TestCaseWithDatabase
         $organizationOwned = Organization::factory()->withOwner($user)->create();
         $organizationNotOwned = Organization::factory()->withOwner($otherUser)->create();
         $memberOwned = Member::factory()->forUser($user)->forOrganization($organizationOwned)->role(Role::Owner)->create();
-        $memberNotOwned = Member::factory()->forUser($user)->forOrganization($organizationNotOwned)->role(Role::Employee)->create();
+        $memberNotOwned = Member::factory()->forUser($user)->forOrganization($organizationNotOwned)->role(Role::GTMEngineer)->create();
         TimeEntry::factory()->forOrganization($organizationOwned)->forMember($memberOwned)->createMany(2);
         TimeEntry::factory()->forOrganization($organizationNotOwned)->forMember($memberNotOwned)->createMany(2);
         $this->assertDatabaseCount(User::class, 2);

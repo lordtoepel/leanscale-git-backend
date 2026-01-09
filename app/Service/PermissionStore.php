@@ -73,9 +73,9 @@ class PermissionStore
 
         $permissions = $roleObj->permissions ?? [];
 
-        // If the organization allows employees to manage tasks and the user is an employee,
+        // If the organization allows GTM Engineers to manage tasks,
         // add the task management permissions for accessible projects
-        if ($role === \App\Enums\Role::Employee->value && $organization->employees_can_manage_tasks) {
+        if ($role === \App\Enums\Role::GTMEngineer->value && $organization->employees_can_manage_tasks) {
             $permissions = array_merge($permissions, [
                 'tasks:create',
                 'tasks:update',

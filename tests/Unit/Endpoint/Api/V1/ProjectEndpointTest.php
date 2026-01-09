@@ -163,7 +163,7 @@ class ProjectEndpointTest extends ApiEndpointTestAbstract
     public function test_index_endpoint_sets_billable_rate_to_null_if_member_is_employee_and_organization_does_not_allow_employees_to_see_billable_rates(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee);
+        $data = $this->createUserWithRole(Role::GTMEngineer);
         $organization = $data->organization;
         $organization->employees_can_see_billable_rates = false;
         $organization->save();
@@ -192,7 +192,7 @@ class ProjectEndpointTest extends ApiEndpointTestAbstract
     public function test_index_endpoint_does_not_set_billable_rate_to_null_if_member_is_employee_and_organization_allows_employees_to_see_billable_rates(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee);
+        $data = $this->createUserWithRole(Role::GTMEngineer);
         $organization = $data->organization;
         $organization->employees_can_see_billable_rates = true;
         $organization->save();

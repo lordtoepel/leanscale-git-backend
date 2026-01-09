@@ -61,7 +61,7 @@ class MemberEndpointTest extends ApiEndpointTestAbstract
         // Act
         $response = $this->putJson(route('api.v1.members.update', [$data->organization->getKey(), $data->member->getKey()]), [
             'billable_rate' => 10001,
-            'role' => Role::Employee->value,
+            'role' => Role::GTMEngineer->value,
         ]);
 
         // Assert
@@ -82,7 +82,7 @@ class MemberEndpointTest extends ApiEndpointTestAbstract
         // Act
         $response = $this->putJson(route('api.v1.members.update', [$data->organization->getKey(), $otherData->member->getKey()]), [
             'billable_rate' => 10001,
-            'role' => Role::Employee->value,
+            'role' => Role::GTMEngineer->value,
         ]);
 
         // Assert
@@ -102,7 +102,7 @@ class MemberEndpointTest extends ApiEndpointTestAbstract
         // Act
         $response = $this->putJson(route('api.v1.members.update', [$data->organization->id, $member]), [
             'billable_rate' => $member->billable_rate,
-            'role' => Role::Employee->value,
+            'role' => Role::GTMEngineer->value,
         ]);
 
         // Assert
@@ -110,7 +110,7 @@ class MemberEndpointTest extends ApiEndpointTestAbstract
         $oldBillableRate = $member->billable_rate;
         $member->refresh();
         $this->assertSame($oldBillableRate, $member->billable_rate);
-        $this->assertSame(Role::Employee->value, $member->role);
+        $this->assertSame(Role::GTMEngineer->value, $member->role);
     }
 
     public function test_update_member_can_update_billable_rate_of_member_and_update_time_entries(): void
@@ -145,7 +145,7 @@ class MemberEndpointTest extends ApiEndpointTestAbstract
             'members:update',
         ]);
         $otherUser = User::factory()->create();
-        $otherMember = Member::factory()->forUser($otherUser)->forOrganization($data->organization)->role(Role::Employee)->create();
+        $otherMember = Member::factory()->forUser($otherUser)->forOrganization($data->organization)->role(Role::GTMEngineer)->create();
         Passport::actingAs($data->user);
 
         // Act
@@ -182,7 +182,7 @@ class MemberEndpointTest extends ApiEndpointTestAbstract
         $data = $this->createUserWithPermission([
             'members:update',
         ]);
-        $member = Member::factory()->forOrganization($data->organization)->role(Role::Employee)->create();
+        $member = Member::factory()->forOrganization($data->organization)->role(Role::GTMEngineer)->create();
         Passport::actingAs($data->user);
 
         // Act
@@ -430,7 +430,7 @@ class MemberEndpointTest extends ApiEndpointTestAbstract
         $data = $this->createUserWithPermission([
             'members:update',
         ]);
-        $member = Member::factory()->forOrganization($data->organization)->role(Role::Employee)->create();
+        $member = Member::factory()->forOrganization($data->organization)->role(Role::GTMEngineer)->create();
         Passport::actingAs($data->user);
 
         // Act
@@ -453,7 +453,7 @@ class MemberEndpointTest extends ApiEndpointTestAbstract
         ]);
         $oldOwner = $data->ownerMember;
         $organization = $data->organization;
-        $member = Member::factory()->forOrganization($data->organization)->role(Role::Employee)->create();
+        $member = Member::factory()->forOrganization($data->organization)->role(Role::GTMEngineer)->create();
         Passport::actingAs($data->user);
 
         // Act
@@ -477,7 +477,7 @@ class MemberEndpointTest extends ApiEndpointTestAbstract
         $data = $this->createUserWithPermission([
             'members:update',
         ]);
-        $member = Member::factory()->forOrganization($data->organization)->role(Role::Employee)->create();
+        $member = Member::factory()->forOrganization($data->organization)->role(Role::GTMEngineer)->create();
         Passport::actingAs($data->user);
 
         // Act
@@ -692,7 +692,7 @@ class MemberEndpointTest extends ApiEndpointTestAbstract
         ]);
         $user = $data->user;
         $otherOrganization = Organization::factory()->create();
-        $otherMember = Member::factory()->forOrganization($otherOrganization)->forUser($user)->role(Role::Employee)->create();
+        $otherMember = Member::factory()->forOrganization($otherOrganization)->forUser($user)->role(Role::GTMEngineer)->create();
         Passport::actingAs($user);
         Event::fake([
             MemberRemoved::class,
@@ -757,7 +757,7 @@ class MemberEndpointTest extends ApiEndpointTestAbstract
         $data = $this->createUserWithPermission([
             'members:delete',
         ]);
-        $otherMember = Member::factory()->forOrganization($data->organization)->role(Role::Employee)->create();
+        $otherMember = Member::factory()->forOrganization($data->organization)->role(Role::GTMEngineer)->create();
         $project = Project::factory()->forOrganization($data->organization)->create();
         $projectMember = ProjectMember::factory()->forProject($project)->forMember($data->member)->create();
         $otherProjectMember = ProjectMember::factory()->forProject($project)->forMember($otherMember)->create();
@@ -798,7 +798,7 @@ class MemberEndpointTest extends ApiEndpointTestAbstract
         $data = $this->createUserWithPermission([
             'members:delete',
         ]);
-        $otherMember = Member::factory()->forOrganization($data->organization)->role(Role::Employee)->create();
+        $otherMember = Member::factory()->forOrganization($data->organization)->role(Role::GTMEngineer)->create();
         $timeEntry = TimeEntry::factory()->forMember($data->member)->forOrganization($data->organization)->create();
         $otherTimeEntry = TimeEntry::factory()->forMember($otherMember)->forOrganization($data->organization)->create();
         Passport::actingAs($data->user);

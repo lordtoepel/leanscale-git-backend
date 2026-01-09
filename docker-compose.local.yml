@@ -1,0 +1,64 @@
+services:
+    app:
+        build:
+            context: ./docker/local/8.3
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '1000'
+        image: leanscale-platform/app
+        ports:
+            - '8080:80'
+            - '5173:5173'
+        environment:
+            XDG_CONFIG_HOME: /var/www/html/config
+            XDG_DATA_HOME: /var/www/html/data
+            WWWUSER: '1000'
+            LARAVEL_SAIL: 1
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - leanscale
+        depends_on:
+            pgsql:
+                condition: service_healthy
+
+    pgsql:
+        image: 'postgres:15'
+        ports:
+            - '5432:5432'
+        environment:
+            PGPASSWORD: 'secret'
+            POSTGRES_DB: 'leanscale'
+            POSTGRES_USER: 'leanscale'
+            POSTGRES_PASSWORD: 'secret'
+        volumes:
+            - 'leanscale-pgsql:/var/lib/postgresql/data'
+        networks:
+            - leanscale
+        healthcheck:
+            test: ["CMD", "pg_isready", "-q", "-d", "leanscale", "-U", "leanscale"]
+            retries: 3
+            timeout: 5s
+
+    mailpit:
+        image: 'axllent/mailpit:latest'
+        ports:
+            - '8025:8025'
+            - '1025:1025'
+        networks:
+            - leanscale
+
+    gotenberg:
+        image: gotenberg/gotenberg:8
+        networks:
+            - leanscale
+        healthcheck:
+            test: ["CMD", "curl", "--silent", "--fail", "http://localhost:3000/health"]
+
+networks:
+    leanscale:
+        driver: bridge
+
+volumes:
+    leanscale-pgsql:
+        driver: local

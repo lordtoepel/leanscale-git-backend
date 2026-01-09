@@ -23,7 +23,7 @@ class PermissionStoreTest extends TestCase
         // Arrange
         $organization = Organization::factory()->create();
         $user = User::factory()->create();
-        $organization->users()->attach($user, ['role' => Role::Employee->value]);
+        $organization->users()->attach($user, ['role' => Role::GTMEngineer->value]);
         $permissionStore = new PermissionStore;
 
         // Act
@@ -53,7 +53,7 @@ class PermissionStoreTest extends TestCase
         // Arrange
         $organization = Organization::factory()->create();
         $user = User::factory()->create();
-        $organization->users()->attach($user, ['role' => Role::Employee->value]);
+        $organization->users()->attach($user, ['role' => Role::GTMEngineer->value]);
         $permissionStore = new PermissionStore;
         $this->actingAs($user);
 
@@ -69,7 +69,7 @@ class PermissionStoreTest extends TestCase
         // Arrange
         $organization = Organization::factory()->create();
         $user = User::factory()->create();
-        $organization->users()->attach($user, ['role' => Role::Employee->value]);
+        $organization->users()->attach($user, ['role' => Role::GTMEngineer->value]);
         $permissionStore = new PermissionStore;
         $this->actingAs($user);
 
@@ -85,7 +85,7 @@ class PermissionStoreTest extends TestCase
         // Arrange
         $organization = Organization::factory()->create();
         $user = User::factory()->create();
-        $organization->users()->attach($user, ['role' => Role::Employee->value]);
+        $organization->users()->attach($user, ['role' => Role::GTMEngineer->value]);
         $permissionStore = new PermissionStore;
 
         // Act
@@ -114,7 +114,7 @@ class PermissionStoreTest extends TestCase
         // Arrange
         $organization = Organization::factory()->create();
         $user = User::factory()->create();
-        $organization->users()->attach($user, ['role' => Role::Employee->value]);
+        $organization->users()->attach($user, ['role' => Role::GTMEngineer->value]);
         $permissionStore = new PermissionStore;
         $this->actingAs($user);
 
@@ -122,7 +122,7 @@ class PermissionStoreTest extends TestCase
         $result = $permissionStore->getPermissions($organization);
 
         // Assert
-        $this->assertSame(Jetstream::findRole(Role::Employee->value)->permissions, $result);
+        $this->assertSame(Jetstream::findRole(Role::GTMEngineer->value)->permissions, $result);
     }
 
     public function test_employee_does_not_have_task_permissions_by_default(): void
@@ -132,7 +132,7 @@ class PermissionStoreTest extends TestCase
             'employees_can_manage_tasks' => false,
         ]);
         $user = User::factory()->create();
-        $organization->users()->attach($user, ['role' => Role::Employee->value]);
+        $organization->users()->attach($user, ['role' => Role::GTMEngineer->value]);
         $permissionStore = new PermissionStore;
         $this->actingAs($user);
 
@@ -152,7 +152,7 @@ class PermissionStoreTest extends TestCase
             'employees_can_manage_tasks' => true,
         ]);
         $user = User::factory()->create();
-        $organization->users()->attach($user, ['role' => Role::Employee->value]);
+        $organization->users()->attach($user, ['role' => Role::GTMEngineer->value]);
         $permissionStore = new PermissionStore;
         $this->actingAs($user);
 
@@ -193,7 +193,7 @@ class PermissionStoreTest extends TestCase
             'employees_can_manage_tasks' => true,
         ]);
         $user = User::factory()->create();
-        $organization->users()->attach($user, ['role' => Role::Employee->value]);
+        $organization->users()->attach($user, ['role' => Role::GTMEngineer->value]);
         $permissionStore = new PermissionStore;
         $this->actingAs($user);
 

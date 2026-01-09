@@ -234,7 +234,7 @@ class TimeEntryController extends Controller
         }
         $user = $this->user();
         $timezone = $user->timezone;
-        $showBillableRate = $this->member($organization)->role !== Role::Employee->value || $organization->employees_can_see_billable_rates;
+        $showBillableRate = $this->member($organization)->role !== Role::GTMEngineer->value || $organization->employees_can_see_billable_rates;
         $roundingType = $canAccessPremiumFeatures ? $request->getRoundingType() : null;
         $roundingMinutes = $canAccessPremiumFeatures ? $request->getRoundingMinutes() : null;
 
@@ -377,7 +377,7 @@ class TimeEntryController extends Controller
         }
         $canAccessPremiumFeatures = $this->canAccessPremiumFeatures($organization);
         $user = $this->user();
-        $showBillableRate = $this->member($organization)->role !== Role::Employee->value || $organization->employees_can_see_billable_rates;
+        $showBillableRate = $this->member($organization)->role !== Role::GTMEngineer->value || $organization->employees_can_see_billable_rates;
 
         $group1Type = $request->getGroup();
         $group2Type = $request->getSubGroup();
@@ -431,7 +431,7 @@ class TimeEntryController extends Controller
         }
         $debug = $request->getDebug();
         $user = $this->user();
-        $showBillableRate = $this->member($organization)->role !== Role::Employee->value || $organization->employees_can_see_billable_rates;
+        $showBillableRate = $this->member($organization)->role !== Role::GTMEngineer->value || $organization->employees_can_see_billable_rates;
 
         $group = $request->getGroup();
         $subGroup = $request->getSubGroup();

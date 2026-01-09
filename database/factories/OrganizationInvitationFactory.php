@@ -23,7 +23,7 @@ class OrganizationInvitationFactory extends Factory
     {
         return [
             'email' => $this->faker->unique()->safeEmail(),
-            'role' => Role::Employee->value,
+            'role' => Role::GTMEngineer->value,
             'organization_id' => Organization::factory(),
         ];
     }

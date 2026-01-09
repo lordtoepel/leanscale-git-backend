@@ -71,8 +71,8 @@ class AddOrganizationMember implements AddsTeamMembers
                 'string',
                 Rule::in([
                     Role::Admin->value,
-                    Role::Manager->value,
-                    Role::Employee->value,
+                    Role::GTMArchitect->value,
+                    Role::GTMEngineer->value,
                 ]),
             ],
         ];

@@ -62,7 +62,7 @@ class OrganizationEndpointTest extends ApiEndpointTestAbstract
     public function test_show_endpoint_shows_billable_rate_for_members_with_role_employee_if_organization_allows_it(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee);
+        $data = $this->createUserWithRole(Role::GTMEngineer);
         $data->organization->employees_can_see_billable_rates = true;
         $data->organization->billable_rate = 100;
         $data->organization->save();
@@ -79,7 +79,7 @@ class OrganizationEndpointTest extends ApiEndpointTestAbstract
     public function test_show_endpoint_does_not_show_billable_rate_for_members_with_role_employee_if_organization_does_not_allow_it(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee);
+        $data = $this->createUserWithRole(Role::GTMEngineer);
         $data->organization->employees_can_see_billable_rates = false;
         $data->organization->billable_rate = 100;
         $data->organization->save();

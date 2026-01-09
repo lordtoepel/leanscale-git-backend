@@ -118,7 +118,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
             'time-entries:view:all',
         ]);
         $user = User::factory()->create();
-        $member = Member::factory()->forOrganization($data->organization)->forUser($user)->role(Role::Employee)->create();
+        $member = Member::factory()->forOrganization($data->organization)->forUser($user)->role(Role::GTMEngineer)->create();
         $timeEntry = TimeEntry::factory()->forOrganization($data->organization)->forMember($member)->create();
         Passport::actingAs($data->user);
 
@@ -137,7 +137,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
             'time-entries:view:all',
         ]);
         $user = User::factory()->create();
-        $member = Member::factory()->forOrganization($data->organization)->forUser($user)->role(Role::Employee)->create();
+        $member = Member::factory()->forOrganization($data->organization)->forUser($user)->role(Role::GTMEngineer)->create();
         $timeEntry1 = TimeEntry::factory()->forOrganization($data->organization)->forMember($data->member)->create([
             'start' => Carbon::now()->subDay(),
         ]);
@@ -892,7 +892,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
     public function test_index_export_endpoint_can_create_a_detailed_time_entry_report_in_format_csv_as_employee_role_with_show_billable_rate(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee, true);
+        $data = $this->createUserWithRole(Role::GTMEngineer, true);
         $client = Client::factory()->forOrganization($data->organization)->create();
         $project = Project::factory()->forOrganization($data->organization)->forClient($client)->create();
         $timeEntry1 = TimeEntry::factory()->forOrganization($data->organization)->forMember($data->member)->startWithDuration(Carbon::now(), 100)->create();
@@ -915,7 +915,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
     public function test_index_export_endpoint_can_create_a_detailed_time_entry_report_in_format_ods_as_employee_role_with_show_billable_rate(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee, true);
+        $data = $this->createUserWithRole(Role::GTMEngineer, true);
         $client = Client::factory()->forOrganization($data->organization)->create();
         $project = Project::factory()->forOrganization($data->organization)->forClient($client)->create();
         $timeEntry1 = TimeEntry::factory()->forOrganization($data->organization)->forMember($data->member)->startWithDuration(Carbon::now(), 100)->create();
@@ -938,7 +938,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
     public function test_index_export_endpoint_can_create_a_detailed_time_entry_report_in_format_xlxs_as_employee_role_with_show_billable_rate(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee, true);
+        $data = $this->createUserWithRole(Role::GTMEngineer, true);
         $client = Client::factory()->forOrganization($data->organization)->create();
         $project = Project::factory()->forOrganization($data->organization)->forClient($client)->create();
         $timeEntry1 = TimeEntry::factory()->forOrganization($data->organization)->forMember($data->member)->startWithDuration(Carbon::now(), 100)->create();
@@ -961,7 +961,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
     public function test_index_export_endpoint_can_create_a_detailed_time_entry_report_in_format_pdf_as_employee_role_with_show_billable_rate(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee, true);
+        $data = $this->createUserWithRole(Role::GTMEngineer, true);
         Passport::actingAs($data->user);
         $client = Client::factory()->forOrganization($data->organization)->create();
         $project = Project::factory()->forOrganization($data->organization)->forClient($client)->create();
@@ -985,7 +985,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
     public function test_index_export_endpoint_can_create_a_detailed_time_entry_report_in_format_csv_as_employee_role_without_show_billable_rate(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee, false);
+        $data = $this->createUserWithRole(Role::GTMEngineer, false);
         $client = Client::factory()->forOrganization($data->organization)->create();
         $project = Project::factory()->forOrganization($data->organization)->forClient($client)->create();
         $timeEntry1 = TimeEntry::factory()->forOrganization($data->organization)->forMember($data->member)->startWithDuration(Carbon::now(), 100)->create();
@@ -1008,7 +1008,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
     public function test_index_export_endpoint_can_create_a_detailed_time_entry_report_in_format_ods_as_employee_role_without_show_billable_rate(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee, false);
+        $data = $this->createUserWithRole(Role::GTMEngineer, false);
         $client = Client::factory()->forOrganization($data->organization)->create();
         $project = Project::factory()->forOrganization($data->organization)->forClient($client)->create();
         $timeEntry1 = TimeEntry::factory()->forOrganization($data->organization)->forMember($data->member)->startWithDuration(Carbon::now(), 100)->create();
@@ -1031,7 +1031,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
     public function test_index_export_endpoint_can_create_a_detailed_time_entry_report_in_format_xlxs_as_employee_role_without_show_billable_rate(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee, false);
+        $data = $this->createUserWithRole(Role::GTMEngineer, false);
         $client = Client::factory()->forOrganization($data->organization)->create();
         $project = Project::factory()->forOrganization($data->organization)->forClient($client)->create();
         $timeEntry1 = TimeEntry::factory()->forOrganization($data->organization)->forMember($data->member)->startWithDuration(Carbon::now(), 100)->create();
@@ -1054,7 +1054,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
     public function test_index_export_endpoint_can_create_a_detailed_time_entry_report_in_format_pdf_as_employee_role_without_show_billable_rate(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee, false);
+        $data = $this->createUserWithRole(Role::GTMEngineer, false);
         Passport::actingAs($data->user);
         $client = Client::factory()->forOrganization($data->organization)->create();
         $project = Project::factory()->forOrganization($data->organization)->forClient($client)->create();
@@ -1193,7 +1193,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
     public function test_aggregate_export_endpoints_can_create_a_csv_report_as_employee_role_with_show_billable_rate(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee, true);
+        $data = $this->createUserWithRole(Role::GTMEngineer, true);
         $client = Client::factory()->forOrganization($data->organization)->create();
         $project = Project::factory()->forOrganization($data->organization)->forClient($client)->create();
         $timeEntry1 = TimeEntry::factory()->forOrganization($data->organization)->forMember($data->member)->startWithDuration(Carbon::now(), 100)->create();
@@ -1219,7 +1219,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
     public function test_aggregate_export_endpoints_can_create_a_csv_report_as_employee_role_without_show_billable_rate(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee, false);
+        $data = $this->createUserWithRole(Role::GTMEngineer, false);
         $client = Client::factory()->forOrganization($data->organization)->create();
         $project = Project::factory()->forOrganization($data->organization)->forClient($client)->create();
         $timeEntry1 = TimeEntry::factory()->forOrganization($data->organization)->forMember($data->member)->startWithDuration(Carbon::now(), 100)->create();
@@ -1272,7 +1272,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
     public function test_aggregate_export_endpoints_can_create_a_xlsx_report_as_employee_role_with_show_billable_rate(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee, true);
+        $data = $this->createUserWithRole(Role::GTMEngineer, true);
         $client = Client::factory()->forOrganization($data->organization)->create();
         $project = Project::factory()->forOrganization($data->organization)->forClient($client)->create();
         $timeEntry1 = TimeEntry::factory()->forOrganization($data->organization)->forMember($data->member)->startWithDuration(Carbon::now(), 100)->create();
@@ -1298,7 +1298,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
     public function test_aggregate_export_endpoints_can_create_a_xlsx_report_as_employee_role_without_show_billable_rate(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee, false);
+        $data = $this->createUserWithRole(Role::GTMEngineer, false);
         $client = Client::factory()->forOrganization($data->organization)->create();
         $project = Project::factory()->forOrganization($data->organization)->forClient($client)->create();
         $timeEntry1 = TimeEntry::factory()->forOrganization($data->organization)->forMember($data->member)->startWithDuration(Carbon::now(), 100)->create();
@@ -1351,7 +1351,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
     public function test_aggregate_export_endpoints_can_create_a_ods_report_as_employee_role_with_show_billable_rate(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee, true);
+        $data = $this->createUserWithRole(Role::GTMEngineer, true);
         $client = Client::factory()->forOrganization($data->organization)->create();
         $project = Project::factory()->forOrganization($data->organization)->forClient($client)->create();
         $timeEntry1 = TimeEntry::factory()->forOrganization($data->organization)->forMember($data->member)->startWithDuration(Carbon::now(), 100)->create();
@@ -1377,7 +1377,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
     public function test_aggregate_export_endpoints_can_create_a_ods_report_as_employee_role_without_show_billable_rate(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee, false);
+        $data = $this->createUserWithRole(Role::GTMEngineer, false);
         $client = Client::factory()->forOrganization($data->organization)->create();
         $project = Project::factory()->forOrganization($data->organization)->forClient($client)->create();
         $timeEntry1 = TimeEntry::factory()->forOrganization($data->organization)->forMember($data->member)->startWithDuration(Carbon::now(), 100)->create();
@@ -1461,7 +1461,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
     public function test_aggregate_export_endpoints_can_create_a_pdf_report_as_employee_role_with_show_billable_rate(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee, true);
+        $data = $this->createUserWithRole(Role::GTMEngineer, true);
         $client = Client::factory()->forOrganization($data->organization)->create();
         $project = Project::factory()->forOrganization($data->organization)->forClient($client)->create();
         $timeEntry1 = TimeEntry::factory()->forOrganization($data->organization)->forMember($data->member)->startWithDuration(Carbon::now(), 100)->create();
@@ -1488,7 +1488,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
     public function test_aggregate_export_endpoints_can_create_a_pdf_report_as_employee_role_without_show_billable_rate(): void
     {
         // Arrange
-        $data = $this->createUserWithRole(Role::Employee, false);
+        $data = $this->createUserWithRole(Role::GTMEngineer, false);
         $client = Client::factory()->forOrganization($data->organization)->create();
         $project = Project::factory()->forOrganization($data->organization)->forClient($client)->create();
         $timeEntry1 = TimeEntry::factory()->forOrganization($data->organization)->forMember($data->member)->startWithDuration(Carbon::now(), 100)->create();
@@ -2189,7 +2189,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
             'projects:view:all',
         ]);
         $otherUser = User::factory()->create();
-        $otherMember = Member::factory()->forOrganization($data->organization)->forUser($otherUser)->role(Role::Employee)->create();
+        $otherMember = Member::factory()->forOrganization($data->organization)->forUser($otherUser)->role(Role::GTMEngineer)->create();
         $timeEntryFake = TimeEntry::factory()->forOrganization($data->organization)->make();
         Passport::actingAs($data->user);
 
@@ -2216,7 +2216,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
             'time-entries:create:all',
         ]);
         $otherUser = User::factory()->create();
-        $otherMember = Member::factory()->forOrganization($data->organization)->forUser($otherUser)->role(Role::Employee)->create();
+        $otherMember = Member::factory()->forOrganization($data->organization)->forUser($otherUser)->role(Role::GTMEngineer)->create();
         $timeEntryFake = TimeEntry::factory()->forOrganization($data->organization)->make();
         Passport::actingAs($data->user);
 
@@ -2373,7 +2373,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
             'projects:view:all',
         ]);
         $user = User::factory()->create();
-        $member = Member::factory()->forOrganization($data->organization)->forUser($user)->role(Role::Employee)->create();
+        $member = Member::factory()->forOrganization($data->organization)->forUser($user)->role(Role::GTMEngineer)->create();
         $timeEntry = TimeEntry::factory()->forOrganization($data->organization)->forMember($member)->create();
         $timeEntryFake = TimeEntry::factory()->forOrganization($data->organization)->make();
         Passport::actingAs($data->user);
@@ -2574,7 +2574,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
             'time-entries:update:all',
         ]);
         $user = User::factory()->create();
-        $member = Member::factory()->forOrganization($data->organization)->forUser($user)->role(Role::Employee)->create();
+        $member = Member::factory()->forOrganization($data->organization)->forUser($user)->role(Role::GTMEngineer)->create();
         $timeEntry = TimeEntry::factory()->forOrganization($data->organization)->forMember($member)->create();
         $timeEntryFake = TimeEntry::factory()->forOrganization($data->organization)->make();
         Passport::actingAs($data->user);
@@ -2607,7 +2607,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
         $user = User::factory()->create();
         $client = Client::factory()->forOrganization($data->organization)->create();
         $project = Project::factory()->forOrganization($data->organization)->forClient($client)->create();
-        $member = Member::factory()->forOrganization($data->organization)->forUser($user)->role(Role::Employee)->create();
+        $member = Member::factory()->forOrganization($data->organization)->forUser($user)->role(Role::GTMEngineer)->create();
         $timeEntry = TimeEntry::factory()->forOrganization($data->organization)->forMember($member)->create();
         Passport::actingAs($data->user);
 
@@ -2637,7 +2637,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
         $user = User::factory()->create();
         $client = Client::factory()->forOrganization($data->organization)->create();
         $project = Project::factory()->forOrganization($data->organization)->forClient($client)->create();
-        $member = Member::factory()->forOrganization($data->organization)->forUser($user)->role(Role::Employee)->create();
+        $member = Member::factory()->forOrganization($data->organization)->forUser($user)->role(Role::GTMEngineer)->create();
         $timeEntry = TimeEntry::factory()->forOrganization($data->organization)->forMember($member)->forProject($project)->create();
         Passport::actingAs($data->user);
 
@@ -2791,7 +2791,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
             'time-entries:delete:own',
         ]);
         $user = User::factory()->create();
-        $member = Member::factory()->forOrganization($data->organization)->forUser($user)->role(Role::Employee)->create();
+        $member = Member::factory()->forOrganization($data->organization)->forUser($user)->role(Role::GTMEngineer)->create();
         $timeEntry = TimeEntry::factory()->forOrganization($data->organization)->forMember($member)->create();
         Passport::actingAs($data->user);
 
@@ -2829,7 +2829,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
             'time-entries:delete:all',
         ]);
         $user = User::factory()->create();
-        $member = Member::factory()->forOrganization($data->organization)->forUser($user)->role(Role::Employee)->create();
+        $member = Member::factory()->forOrganization($data->organization)->forUser($user)->role(Role::GTMEngineer)->create();
         $timeEntry = TimeEntry::factory()->forOrganization($data->organization)->forMember($member)->create();
         Passport::actingAs($data->user);
 
@@ -2892,7 +2892,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
         ]);
         $otherData = $this->createUserWithPermission();
         $otherUser = User::factory()->create();
-        $otherMember = Member::factory()->forOrganization($data->organization)->forUser($otherUser)->role(Role::Employee)->create();
+        $otherMember = Member::factory()->forOrganization($data->organization)->forUser($otherUser)->role(Role::GTMEngineer)->create();
 
         $ownTimeEntry = TimeEntry::factory()->forMember($data->member)->create();
         $otherTimeEntry = TimeEntry::factory()->forMember($otherMember)->create();
@@ -2942,7 +2942,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
         ]);
         $otherData = $this->createUserWithPermission();
         $otherUser = User::factory()->create();
-        $otherMember = Member::factory()->forOrganization($data->organization)->forUser($otherUser)->role(Role::Employee)->create();
+        $otherMember = Member::factory()->forOrganization($data->organization)->forUser($otherUser)->role(Role::GTMEngineer)->create();
 
         $ownTimeEntry = TimeEntry::factory()->forMember($data->member)->create();
         $otherTimeEntry = TimeEntry::factory()->forMember($otherMember)->create();
@@ -3216,7 +3216,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
         ]);
         $otherData = $this->createUserWithPermission();
         $otherUser = User::factory()->create();
-        $otherMember = Member::factory()->forOrganization($data->organization)->forUser($otherUser)->role(Role::Employee)->create();
+        $otherMember = Member::factory()->forOrganization($data->organization)->forUser($otherUser)->role(Role::GTMEngineer)->create();
 
         $ownTimeEntry = TimeEntry::factory()->forMember($data->member)->create();
         $otherTimeEntry = TimeEntry::factory()->forMember($otherMember)->create();
@@ -3274,7 +3274,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
         ]);
         $otherData = $this->createUserWithPermission();
         $otherUser = User::factory()->create();
-        $otherMember = Member::factory()->forOrganization($data->organization)->forUser($otherUser)->role(Role::Employee)->create();
+        $otherMember = Member::factory()->forOrganization($data->organization)->forUser($otherUser)->role(Role::GTMEngineer)->create();
 
         $ownTimeEntry = TimeEntry::factory()->forMember($data->member)->create();
         $otherTimeEntry = TimeEntry::factory()->forMember($otherMember)->create();
@@ -3399,7 +3399,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
         ]);
         $otherData = $this->createUserWithPermission();
         $otherUser = User::factory()->create();
-        $otherMember = Member::factory()->forOrganization($data->organization)->forUser($otherUser)->role(Role::Employee)->create();
+        $otherMember = Member::factory()->forOrganization($data->organization)->forUser($otherUser)->role(Role::GTMEngineer)->create();
 
         $ownTimeEntry = TimeEntry::factory()->forMember($data->member)->create();
         $otherTimeEntry = TimeEntry::factory()->forMember($otherMember)->create();
@@ -3456,7 +3456,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
         ]);
         $otherData = $this->createUserWithPermission();
         $otherUser = User::factory()->create();
-        $otherMember = Member::factory()->forOrganization($data->organization)->forUser($otherUser)->role(Role::Employee)->create();
+        $otherMember = Member::factory()->forOrganization($data->organization)->forUser($otherUser)->role(Role::GTMEngineer)->create();
 
         $ownTimeEntry = TimeEntry::factory()->forMember($data->member)->create();
         $otherTimeEntry = TimeEntry::factory()->forMember($otherMember)->create();
@@ -3964,7 +3964,7 @@ class TimeEntryEndpointTest extends ApiEndpointTestAbstract
             'projects:view:all',
         ]);
         $otherUser = User::factory()->create();
-        $otherMember = Member::factory()->forOrganization($data->organization)->forUser($otherUser)->role(Role::Employee)->create();
+        $otherMember = Member::factory()->forOrganization($data->organization)->forUser($otherUser)->role(Role::GTMEngineer)->create();
 
         $ownTimeEntry = TimeEntry::factory()->forMember($data->member)->create();
         Passport::actingAs($data->user);

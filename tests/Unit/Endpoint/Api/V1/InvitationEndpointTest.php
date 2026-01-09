@@ -64,7 +64,7 @@ class InvitationEndpointTest extends ApiEndpointTestAbstract
         // Act
         $response = $this->postJson(route('api.v1.invitations.store', $data->organization->getKey()), [
             'email' => 'test@mail.test',
-            'role' => Role::Employee->value,
+            'role' => Role::GTMEngineer->value,
         ]);
 
         // Assert
@@ -121,7 +121,7 @@ class InvitationEndpointTest extends ApiEndpointTestAbstract
         // Act
         $response = $this->postJson(route('api.v1.invitations.store', $data->organization->getKey()), [
             'email' => $member->user->email,
-            'role' => Role::Employee->value,
+            'role' => Role::GTMEngineer->value,
         ]);
 
         // Assert
@@ -144,7 +144,7 @@ class InvitationEndpointTest extends ApiEndpointTestAbstract
         // Act
         $response = $this->postJson(route('api.v1.invitations.store', $data->organization->getKey()), [
             'email' => $email,
-            'role' => Role::Employee->value,
+            'role' => Role::GTMEngineer->value,
         ]);
 
         // Assert
@@ -169,7 +169,7 @@ class InvitationEndpointTest extends ApiEndpointTestAbstract
         // Act
         $response = $this->postJson(route('api.v1.invitations.store', $data->organization->getKey()), [
             'email' => $user->email,
-            'role' => Role::Employee->value,
+            'role' => Role::GTMEngineer->value,
         ]);
 
         // Assert
@@ -177,7 +177,7 @@ class InvitationEndpointTest extends ApiEndpointTestAbstract
         $invitation = OrganizationInvitation::first();
         $this->assertNotNull($invitation);
         $this->assertEquals($user->email, $invitation->email);
-        $this->assertEquals(Role::Employee->value, $invitation->role);
+        $this->assertEquals(Role::GTMEngineer->value, $invitation->role);
         Mail::assertQueued(fn (OrganizationInvitationMail $mail): bool => $mail->invitation->is($invitation));
         Mail::assertNothingSent();
     }
@@ -193,7 +193,7 @@ class InvitationEndpointTest extends ApiEndpointTestAbstract
         // Act
         $response = $this->postJson(route('api.v1.invitations.store', $data->organization->getKey()), [
             'email' => 'test@asdf.at',
-            'role' => Role::Employee->value,
+            'role' => Role::GTMEngineer->value,
         ]);
 
         // Assert
@@ -201,7 +201,7 @@ class InvitationEndpointTest extends ApiEndpointTestAbstract
         $invitation = OrganizationInvitation::first();
         $this->assertNotNull($invitation);
         $this->assertEquals('test@asdf.at', $invitation->email);
-        $this->assertEquals(Role::Employee->value, $invitation->role);
+        $this->assertEquals(Role::GTMEngineer->value, $invitation->role);
         Mail::assertQueued(fn (OrganizationInvitationMail $mail): bool => $mail->invitation->is($invitation));
         Mail::assertNothingSent();
     }

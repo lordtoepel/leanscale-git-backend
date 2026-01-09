@@ -26,7 +26,7 @@ class DashboardController extends Controller
             $latestTeamActivity = $dashboardService->latestTeamActivity($organization);
         }
 
-        $showBillableRate = $this->member($organization)->role !== Role::Employee->value || $organization->employees_can_see_billable_rates;
+        $showBillableRate = $this->member($organization)->role !== Role::GTMEngineer->value || $organization->employees_can_see_billable_rates;
 
         return Inertia::render('Dashboard');
     }

@@ -210,7 +210,8 @@ class JetstreamServiceProvider extends ServiceProvider
             'invoice-settings:update',
         ])->description('Administrator users can perform any action, except accessing the billing dashboard.');
 
-        Jetstream::role(Role::Manager->value, 'Manager', [
+        // GTM Architect: Project manager level - manage projects, tickets, view all time, assign work
+        Jetstream::role(Role::GTMArchitect->value, 'GTM Architect', [
             'charts:view:own',
             'charts:view:all',
             'projects:view',
@@ -244,9 +245,6 @@ class JetstreamServiceProvider extends ServiceProvider
             'tags:delete',
             'clients:view',
             'clients:view:all',
-            'clients:create',
-            'clients:update',
-            'clients:delete',
             'organizations:view',
             'invitations:view',
             'members:view',
@@ -254,16 +252,17 @@ class JetstreamServiceProvider extends ServiceProvider
             'reports:create',
             'reports:update',
             'reports:delete',
-            'invoices:view',
-            'invoices:create',
-            'invoices:update',
-            'invoices:download',
-            'invoices:delete',
-            'invoice-settings:view',
-            'invoice-settings:update',
-        ])->description('Managers have full access to all projects, time entries, ect. but cannot manage the organization (add/remove member, edit the organization, ect.).');
+            // Ticket permissions (to be added with Ticketing module)
+            'tickets:view',
+            'tickets:view:all',
+            'tickets:create',
+            'tickets:update',
+            'tickets:delete',
+            'tickets:assign',
+        ])->description('GTM Architects are project managers who can manage projects, tickets, view all time entries, and assign work to team members.');
 
-        Jetstream::role(Role::Employee->value, 'Employee', [
+        // GTM Engineer: Can track time, view assigned tickets, complete work
+        Jetstream::role(Role::GTMEngineer->value, 'GTM Engineer', [
             'charts:view:own',
             'projects:view',
             'tags:view',
@@ -274,7 +273,22 @@ class JetstreamServiceProvider extends ServiceProvider
             'time-entries:update:own',
             'time-entries:delete:own',
             'organizations:view',
-        ])->description('Employees have the ability to read, create, and update their own time entries, they can see the projects that they are members of and the clients they are assigned to.');
+            // Ticket permissions (to be added with Ticketing module)
+            'tickets:view:assigned',
+            'tickets:update:assigned',
+            'tickets:comment',
+        ])->description('GTM Engineers can track their time, view and work on assigned tickets, and complete their assigned work.');
+
+        // Client: External client access - view their projects, create/comment on tickets
+        Jetstream::role(Role::Client->value, 'Client', [
+            'projects:view',
+            'organizations:view',
+            // Ticket permissions (to be added with Ticketing module)
+            'tickets:view:own',
+            'tickets:create',
+            'tickets:comment',
+            'tickets:view-time-spent',
+        ])->description('Clients can view their projects, create and comment on tickets, and see time spent on their work.');
 
         Jetstream::role(Role::Placeholder->value, 'Placeholder', [
         ])->description('Placeholders are used for importing data. They cannot log in and have no permissions.');

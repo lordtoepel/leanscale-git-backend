@@ -24,7 +24,7 @@ class OrganizationController extends Controller
     {
         $this->checkPermission($organization, 'organizations:view');
 
-        $showBillableRate = $this->member($organization)->role !== Role::Employee->value || $organization->employees_can_see_billable_rates;
+        $showBillableRate = $this->member($organization)->role !== Role::GTMEngineer->value || $organization->employees_can_see_billable_rates;
 
         return new OrganizationResource($organization, $showBillableRate);
     }

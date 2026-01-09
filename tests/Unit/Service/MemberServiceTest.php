@@ -69,14 +69,14 @@ class MemberServiceTest extends TestCaseWithDatabase
         // Arrange
         $user = User::factory()->create();
         $organization = Organization::factory()->create();
-        $member = Member::factory()->forOrganization($organization)->forUser($user)->role(Role::Employee)->create();
+        $member = Member::factory()->forOrganization($organization)->forUser($user)->role(Role::GTMEngineer)->create();
         $timeEntry = TimeEntry::factory()->forOrganization($organization)->forMember($member)->create();
         $project = Project::factory()->forOrganization($organization)->create();
         $projectMember = ProjectMember::factory()->forProject($project)->forMember($member)->create();
         // Note: create other user, organization, member, time entry and project member to check that they are not changed
         $otherUser = User::factory()->create();
         $otherOrganization = Organization::factory()->create();
-        $otherMember = Member::factory()->forOrganization($otherOrganization)->forUser($otherUser)->role(Role::Employee)->create();
+        $otherMember = Member::factory()->forOrganization($otherOrganization)->forUser($otherUser)->role(Role::GTMEngineer)->create();
         $otherTimeEntry = TimeEntry::factory()->forOrganization($otherOrganization)->forMember($otherMember)->create();
         $otherProject = Project::factory()->forOrganization($otherOrganization)->create();
         $otherProjectMember = ProjectMember::factory()->forProject($otherProject)->forMember($otherMember)->create();
@@ -103,7 +103,7 @@ class MemberServiceTest extends TestCaseWithDatabase
         $otherProjectMember->refresh();
         $otherUser->refresh();
         $this->assertFalse($otherUser->is_placeholder);
-        $this->assertSame(Role::Employee->value, $otherMember->role);
+        $this->assertSame(Role::GTMEngineer->value, $otherMember->role);
         $this->assertSame($otherOrganization->getKey(), $otherMember->organization_id);
         $this->assertSame($otherUser->getKey(), $otherProjectMember->user_id);
         $this->assertSame($otherMember->getKey(), $otherProjectMember->member_id);
@@ -117,7 +117,7 @@ class MemberServiceTest extends TestCaseWithDatabase
         // Arrange
         $organization = Organization::factory()->create();
         $user = User::factory()->forCurrentOrganization($organization)->create();
-        $member = Member::factory()->forOrganization($organization)->forUser($user)->role(Role::Employee)->create();
+        $member = Member::factory()->forOrganization($organization)->forUser($user)->role(Role::GTMEngineer)->create();
 
         // Act
         $this->memberService->makeMemberToPlaceholder($member);
@@ -133,10 +133,10 @@ class MemberServiceTest extends TestCaseWithDatabase
         // Arrange
         $organization = Organization::factory()->create();
         $user = User::factory()->forCurrentOrganization($organization)->create();
-        $member = Member::factory()->forOrganization($organization)->forUser($user)->role(Role::Employee)->create();
+        $member = Member::factory()->forOrganization($organization)->forUser($user)->role(Role::GTMEngineer)->create();
 
         $otherOrganization = Organization::factory()->create();
-        $otherMember = Member::factory()->forOrganization($otherOrganization)->forUser($user)->role(Role::Employee)->create();
+        $otherMember = Member::factory()->forOrganization($otherOrganization)->forUser($user)->role(Role::GTMEngineer)->create();
 
         // Act
         $this->memberService->makeMemberToPlaceholder($member);
