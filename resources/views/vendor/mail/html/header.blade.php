@@ -2,8 +2,8 @@
 <tr>
 <td class="header">
 <a href="{{ $url }}" style="display: inline-block;">
-@if(trim($slot) === 'solidtime')
-<img src="{{ asset('images/solidtime-logo.png') }}" srcset="{{ asset('images/solidtime-logo.svg') }}" class="logo" alt="solidtime Logo">
+@if(trim($slot) === 'LeanScale')
+<img src="{{ asset('images/leanscale-logo.svg') }}" class="logo" alt="LeanScale Logo">
 @else
 {{ $slot }}
 @endif

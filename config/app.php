@@ -24,7 +24,7 @@ return [
     |
     */
 
-    'name' => 'solidtime',
+    'name' => env('APP_NAME', 'LeanScale'),
 
     'version' => env('APP_VERSION'),
 
