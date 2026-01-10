@@ -26,10 +26,10 @@ FROM dunglas/frankenphp:${FRANKENPHP_VERSION}-php${PHP_VERSION} AS base
 
 COPY --from=upstream /usr/local/bin/frankenphp /usr/local/bin/frankenphp
 
-LABEL maintainer="solidtime <hello@solidtime.io>"
-LABEL org.opencontainers.image.title="solidtime"
-LABEL org.opencontainers.image.description="solidtime is a modern open source timetracker for freelancers and agencies"
-LABEL org.opencontainers.image.source="https://github.com/solidtime-io/solidtime"
+LABEL maintainer="LeanScale <hello@leanscale.com>"
+LABEL org.opencontainers.image.title="LeanScale Platform"
+LABEL org.opencontainers.image.description="LeanScale Platform - Time tracking and project management for GTM teams"
+LABEL org.opencontainers.image.source="https://github.com/LeanScaleTeam/solidtime"
 LABEL org.opencontainers.image.licenses="AGPL"
 
 ARG WWWUSER=1000
@@ -190,6 +190,8 @@ ENV WITH_HORIZON=false \
     WITH_REVERB=false
 
 COPY --link --chown=${WWWUSER}:${WWWUSER} . .
+# Copy minimal .env for Docker build (Railway/container runtime overrides via env vars)
+COPY --link --chown=${WWWUSER}:${WWWUSER} .env.docker .env
 #COPY --link --chown=${WWWUSER}:${WWWUSER} --from=build ${ROOT}/public public
 
 RUN mkdir -p \
@@ -204,8 +206,9 @@ RUN mkdir -p \
 #    --no-dev \
 #    && composer clear-cache
 
-RUN cat .env
-#RUN php artisan env
+# Debug: show .env if present (optional, commented for Railway)
+# RUN cat .env
+# RUN php artisan env
 
 EXPOSE 8000
 
