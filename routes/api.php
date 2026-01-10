@@ -21,6 +21,7 @@ use App\Http\Controllers\Api\V1\TimeEntryController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\UserMembershipController;
 use App\Http\Controllers\Api\V1\UserTimeEntryController;
+use App\Http\Controllers\GitHubWebhookController;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -34,6 +35,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+// GitHub Webhook (no auth required, uses signature verification)
+Route::post('/webhooks/github', [GitHubWebhookController::class, 'handle'])->name('webhooks.github');
 
 Route::prefix('v1')->name('v1.')->group(static function (): void {
     Route::middleware([
