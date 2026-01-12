@@ -76,7 +76,8 @@ class GitHubDataProvider
             ? "{$entityType}/{$organizationId}/{$filename}"
             : "{$entityType}/{$filename}";
 
-        $this->createOrUpdateFile($path, $data, "Create {$entityType}: {$data['name'] ?? $id}");
+        $entityName = $data['name'] ?? $id;
+        $this->createOrUpdateFile($path, $data, "Create {$entityType}: {$entityName}");
 
         $this->clearCache($entityType, $organizationId);
 
@@ -114,10 +115,11 @@ class GitHubDataProvider
             return null;
         }
 
+        $entityName = $updated['name'] ?? $id;
         $this->createOrUpdateFile(
             $file['path'],
             $updated,
-            "Update {$entityType}: {$updated['name'] ?? $id}",
+            "Update {$entityType}: {$entityName}",
             $file['sha']
         );
 
