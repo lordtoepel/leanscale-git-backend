@@ -5,10 +5,10 @@ services:
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '1000'
-        image: leanscale-platform/app
+        image: leanscale-git-backend/app
         ports:
-            - '8080:80'
-            - '5173:5173'
+            - '8081:80'
+            - '5174:5173'
         environment:
             XDG_CONFIG_HOME: /var/www/html/config
             XDG_DATA_HOME: /var/www/html/data
@@ -17,7 +17,7 @@ services:
         volumes:
             - '.:/var/www/html'
         networks:
-            - leanscale
+            - leanscale-git
         depends_on:
             pgsql:
                 condition: service_healthy
@@ -25,16 +25,16 @@ services:
     pgsql:
         image: 'postgres:15'
         ports:
-            - '5432:5432'
+            - '5433:5432'
         environment:
             PGPASSWORD: 'secret'
             POSTGRES_DB: 'leanscale'
             POSTGRES_USER: 'leanscale'
             POSTGRES_PASSWORD: 'secret'
         volumes:
-            - 'leanscale-pgsql:/var/lib/postgresql/data'
+            - 'leanscale-git-pgsql:/var/lib/postgresql/data'
         networks:
-            - leanscale
+            - leanscale-git
         healthcheck:
             test: ["CMD", "pg_isready", "-q", "-d", "leanscale", "-U", "leanscale"]
             retries: 3
@@ -43,22 +43,22 @@ services:
     mailpit:
         image: 'axllent/mailpit:latest'
         ports:
-            - '8025:8025'
-            - '1025:1025'
+            - '8026:8025'
+            - '1026:1025'
         networks:
-            - leanscale
+            - leanscale-git
 
     gotenberg:
         image: gotenberg/gotenberg:8
         networks:
-            - leanscale
+            - leanscale-git
         healthcheck:
             test: ["CMD", "curl", "--silent", "--fail", "http://localhost:3000/health"]
 
 networks:
-    leanscale:
+    leanscale-git:
         driver: bridge
 
 volumes:
-    leanscale-pgsql:
+    leanscale-git-pgsql:
         driver: local
